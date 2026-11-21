@@ -6,7 +6,8 @@
   overflow-y: auto;
   background: var(--bg-sidebar);
   border-right: 1px solid var(--border);
-  padding: var(--space-5) 10px;
+  /* No bottom padding here: .bottom carries it so it survives scrolling on short windows. */
+  padding: var(--space-5) 10px 0;
   display: flex;
   flex-direction: column;
   transition: background-color var(--duration-theme) ease;
@@ -118,10 +119,14 @@
 }
 
 /* Reminders + profile */
+/* Fills the space below the nav; never shrinks below its content, so on short windows
+   the panel scrolls and the profile tab keeps the same 20px gap at the bottom as the
+   logo has at the top. */
 .bottom {
-  flex: 1;
-  min-height: 0;
+  flex: 1 0 auto;
   padding-top: var(--space-10);
+  /* Same as the gap above the logo */
+  padding-bottom: var(--space-5);
   display: flex;
   flex-direction: column;
 }
