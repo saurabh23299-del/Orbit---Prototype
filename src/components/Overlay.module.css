@@ -1,0 +1,139 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.scrim {
+  all: unset;
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+  cursor: pointer;
+}
+
+/* Drawer */
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--drawer-width);
+  max-width: 100%;
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-drawer);
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+/* Modal */
+.modalWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  pointer-events: none;
+}
+
+.modal {
+  pointer-events: auto;
+  width: var(--modal-width);
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+/* Shared header / body / footer */
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-6) var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.headMain {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.drawerContent {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.footStacked {
+  padding: var(--space-3) var(--space-6) var(--space-5);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: var(--weight-semibold);
+}
+
+.subtitle {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.foot {
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .drawer {
+    width: 100%;
+  }
+  .modalWrap {
+    padding: var(--space-3);
+  }
+  .head,
+  .body,
+  .foot,
+  .footStacked {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}

@@ -1,0 +1,77 @@
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+  transition:
+    border-color var(--duration-hover-out) var(--ease-out),
+    background-color var(--duration-theme) ease;
+}
+
+.padMd { padding: var(--space-5); }
+.padLg { padding: var(--space-6); }
+
+.interactive:hover,
+.card[data-force="hover"] {
+  border-color: var(--border-strong);
+  transition-duration: var(--duration-hover);
+}
+
+.kepler {
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+    linear-gradient(100deg, var(--kepler), var(--primary)) border-box;
+}
+
+/* KPI card */
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.kpiHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kpiLabel {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.tile {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpiValueRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.unit {
+  color: var(--text-secondary);
+}
+
+.danger {
+  color: var(--danger-text);
+}
+
+.footer {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}

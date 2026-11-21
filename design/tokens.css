@@ -1,0 +1,241 @@
+/* =========================================================================
+   Orbit design tokens
+   Light is the default. Put data-theme="dark" on <html> for dark mode.
+   Never hardcode a hex value in components: always use these variables.
+   ========================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* ---------- Neutrals ---------- */
+  --bg-canvas: #F6F3EE;          /* page background */
+  --bg-surface: #FCFBF8;         /* cards, inputs, secondary buttons */
+  --bg-subtle: #EFEBE4;          /* inner boxes, table header, progress track */
+  --bg-sidebar: #EAE5DC;         /* side panel, darker than canvas */
+  --border: #E4DED4;             /* default 1px border and dividers */
+  --border-strong: #D4CCBF;      /* secondary button border, card hover border */
+  --text-primary: #1F1C18;
+  --text-secondary: #514C45;
+  --text-muted: #6F6A62;         /* not on --bg-sidebar (fails contrast there) */
+  --text-disabled: #A39E94;
+
+  /* ---------- Orbit indigo (brand primary) ---------- */
+  --primary-tint: #EDEEF7;       /* selected nav, avatar, info chip bg */
+  --primary-tint-hover: #E3E5F3; /* selected item on hover */
+  --primary-subtle: #CDD0EA;     /* input focus glow */
+  --primary: #5360B5;            /* primary button, focus ring, chart series 1 */
+  --primary-hover: #4A56A8;
+  --primary-pressed: #404B95;
+  --primary-text: #444F9C;       /* links, selected nav text and icon */
+  --primary-text-hover: #363F80;
+
+  /* ---------- Kepler violet (AI only) ---------- */
+  --kepler-tint: #F3F0F8;
+  --kepler-subtle: #DCD3EC;
+  --kepler: #7A64B8;
+  --kepler-hover: #6E59AA;
+  --kepler-pressed: #614E99;
+  --kepler-text: #634E9E;
+
+  /* ---------- Status (tint bg + text) ---------- */
+  --success-bg: #EAF2EA;  --success-text: #3D6B47;
+  --warning-bg: #FBF1DE;  --warning-text: #8A5A12;
+  --danger-bg:  #F8E9E5;  --danger-text:  #9A3B2C;
+  --danger: #A8432F;  --danger-hover: #973B29;  --danger-pressed: #85331F;
+
+  /* ---------- Workload bands (Low < 60, Moderate 60–85, High > 85) ---------- */
+  --load-under: #DCDFEE;      /* Low */
+  --load-healthy: #9CC5A1;    /* Moderate */
+  --load-overloaded: #E19A8A; /* High */
+  --on-load: #1F1C18;         /* text on any band fill (light) */
+  --scrim: rgba(31, 28, 24, 0.28);
+
+  /* ---------- Charts ---------- */
+  --chart-1: #5360B5;
+  --chart-2: #6FA3C7;
+  --chart-3: #7FB5A8;
+  --chart-4: #D9A77A;
+  --chart-previous: #D4CCBF;
+
+  /* ---------- Interaction states ---------- */
+  --secondary-hover: #F3EFE8;
+  --secondary-pressed: #EAE5DC;
+  --ghost-hover: #ECE8E1;
+  --ghost-pressed: #E3DED6;
+  --sidebar-hover: #E0D9CC;
+  --row-hover: #F8F6F1;
+  --disabled-bg: #EFEBE4;
+  --toggle-off: #D4CCBF;
+  --toggle-off-hover: #C4BBAD;
+  --input-border-hover: #B9B0A2;
+  --focus-ring: #5360B5;
+  --donut-on-ring: #A3ABDD;
+  --donut-late-ring: #EDCBA9;
+
+  /* ---------- Brand ---------- */
+  --brand-ink: #263321;          /* Orbit logo */
+
+  /* ---------- Elevation ---------- */
+  --shadow-card: 0 1px 2px rgba(31, 28, 24, 0.04);
+  --shadow-popover: 0 8px 24px rgba(31, 28, 24, 0.08), 0 2px 6px rgba(31, 28, 24, 0.05);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-canvas: #171512;
+  --bg-surface: #201D19;
+  --bg-subtle: #2A2621;
+  --bg-sidebar: #100E0C;
+  --border: #36312B;
+  --border-strong: #4A443C;
+  --text-primary: #F2EEE7;
+  --text-secondary: #C9C2B6;
+  --text-muted: #A39C91;
+  --text-disabled: #6B655C;
+
+  --primary-tint: #252840;
+  --primary-tint-hover: #2D3150;
+  --primary-subtle: #3A4070;
+  --primary: #5F6CC0;
+  --primary-hover: #6570C2;
+  --primary-pressed: #5662B3;
+  --primary-text: #A9B2EC;
+  --primary-text-hover: #C3CAF2;
+
+  --kepler-tint: #2A2438;
+  --kepler-subtle: #43395E;
+  --kepler: #7360BA;
+  --kepler-hover: #7A67BF;
+  --kepler-pressed: #6654A8;
+  --kepler-text: #C4B7EE;
+
+  --success-bg: #1F2B22;  --success-text: #9CCBA6;
+  --warning-bg: #2E2616;  --warning-text: #E3BE78;
+  --danger-bg:  #33201C;  --danger-text:  #EBA597;
+  --danger: #A94B3C;  --danger-hover: #B05346;  --danger-pressed: #984034;
+
+  --load-under: #3A3F5C;
+  --load-healthy: #6E9C76;
+  --load-overloaded: #B9705F;
+  --on-load: #171512;         /* on Moderate/High; use --text-primary on Low */
+  --scrim: rgba(0, 0, 0, 0.5);
+
+  --chart-1: #8390DA;
+  --chart-2: #7FB2D4;
+  --chart-3: #8EC2B5;
+  --chart-4: #DDB088;
+  --chart-previous: #4A443C;
+
+  --secondary-hover: #2A2621;
+  --secondary-pressed: #332E28;
+  --ghost-hover: #26231F;
+  --ghost-pressed: #2F2B26;
+  --sidebar-hover: #1C1916;
+  --row-hover: #24211D;
+  --disabled-bg: #2A2621;
+  --toggle-off: #4A443C;
+  --toggle-off-hover: #5C554B;
+  --input-border-hover: #5C554B;
+  --focus-ring: #A9B2EC;
+  --donut-on-ring: #A9B2EC;
+  --donut-late-ring: #F0D2B4;
+
+  --brand-ink: #EDE9DF;
+
+  --shadow-card: none;
+  --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Mode-independent tokens ---------- */
+:root {
+  /* Typography */
+  --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700; /* rare emphasis only */
+
+  /* Spacing: 4px base */
+  --space-0-5: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius */
+  --radius-sm: 8px;    /* buttons, inputs, nav items */
+  --radius-md: 12px;   /* cards, inner boxes */
+  --radius-lg: 16px;   /* Kepler panel, modals */
+  --radius-full: 999px;
+
+  /* Layout */
+  --sidebar-width: 216px;
+  --header-height: 64px;
+  --frame-width: 1280px;
+  --frame-height: 960px;
+  --content-max-width: 1240px;
+
+  /* Control sizes */
+  --control-sm: 32px;
+  --control-md: 36px;
+  --nav-item-height: 40px;
+  --chip-height: 24px;
+
+  /* Motion */
+  --duration-press: 80ms;
+  --duration-hover: 120ms;
+  --duration-hover-out: 150ms;
+  --duration-select: 200ms;
+  --duration-theme: 250ms;
+  --duration-enter: 350ms;
+  --duration-chart: 600ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Base ---------- */
+html { background: var(--bg-canvas); }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--duration-theme) ease, color var(--duration-theme) ease;
+}
+
+/* ---------- Text styles ---------- */
+.text-display  { font-size: 24px; line-height: 40px; font-weight: 600; letter-spacing: -0.015em; font-variant-numeric: tabular-nums; }
+.text-h1       { font-size: 28px; line-height: 36px; font-weight: 600; letter-spacing: -0.015em; }
+.text-h2       { font-size: 18px; line-height: 26px; font-weight: 600; }
+.text-h3       { font-size: 16px; line-height: 24px; font-weight: 600; }
+.text-body     { font-size: 14px; line-height: 22px; font-weight: 400; }
+.text-body-md  { font-size: 14px; line-height: 22px; font-weight: 500; }
+.text-small    { font-size: 13px; line-height: 20px; font-weight: 400; }
+.text-caption  { font-size: 12px; line-height: 16px; font-weight: 500; }
+.text-overline { font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---------- Focus ---------- */
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-canvas), 0 0 0 4px var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

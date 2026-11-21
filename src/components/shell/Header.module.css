@@ -1,0 +1,112 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  /* It's a flex item in the scrolling main column; don't let it shrink when its rows wrap. */
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: minmax(max-content, 1fr) minmax(220px, 400px) minmax(max-content, 1fr);
+  align-items: center;
+  gap: var(--space-4);
+  min-height: var(--header-height);
+  padding: var(--space-4) var(--space-8);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-canvas);
+  transition: background-color var(--duration-theme) ease;
+}
+
+.team {
+  justify-self: start;
+}
+
+.search {
+  width: 100%;
+}
+
+.kbd {
+  display: inline-block;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  justify-self: end;
+}
+
+.bell {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger-text);
+  box-shadow: 0 0 0 2px var(--bg-surface);
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-left: var(--space-1);
+  background: var(--primary-tint);
+  color: var(--primary-text);
+  font-size: 13px;
+  font-weight: var(--weight-semibold);
+}
+
+.avatar:hover:not(:disabled) {
+  background: var(--primary-tint-hover);
+  color: var(--primary-text);
+}
+
+.avatar:active:not(:disabled) {
+  background: var(--primary-tint-hover);
+  color: var(--primary-text);
+}
+
+.spinning {
+  animation: orbit-rotate 0.7s linear infinite;
+}
+
+@media (max-width: 900px) {
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+  .search {
+    order: 3;
+    flex: 1 1 100%;
+  }
+  .actions {
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    position: static;
+    padding: var(--space-4);
+  }
+}
+
+/* Local copy: CSS modules scope keyframe names, so the global one isn't visible here. */
+@keyframes orbit-rotate {
+  to { transform: rotate(360deg); }
+}

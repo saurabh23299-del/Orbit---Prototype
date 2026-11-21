@@ -1,0 +1,588 @@
+/* ---------- Shared ---------- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sectionDesc {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+.label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+.strong {
+  font-weight: var(--weight-medium);
+}
+
+/* Full-row toggle button */
+.rowbtn {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.rowbtn:focus-visible {
+  box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--focus-ring);
+}
+
+/* Expander chevron: 28px hit area */
+.chev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition:
+    transform var(--duration-select) var(--ease-in-out),
+    background-color var(--duration-hover-out) var(--ease-out),
+    color var(--duration-hover-out) var(--ease-out);
+}
+
+.chevOpen {
+  transform: rotate(180deg);
+}
+
+.rowbtn:hover .chev {
+  background: var(--ghost-hover);
+  color: var(--text-primary);
+  transition-duration: var(--duration-select), var(--duration-hover), var(--duration-hover);
+}
+
+.rowbtn:active .chev {
+  background: var(--ghost-pressed);
+}
+
+/* ---------- KPI row ---------- */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+/* Team size footer: one designation per line */
+.roleList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpiLine {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+/* ---------- Kepler alert card ---------- */
+.alertCard {
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
+    linear-gradient(100deg, var(--kepler), var(--primary)) border-box;
+  box-shadow: var(--shadow-card);
+}
+
+.alertHead {
+  width: 100%;
+  padding: var(--space-5) var(--space-6);
+  gap: var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
+.keplerTile {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-tile);
+  background: var(--kepler-tint);
+  color: var(--kepler-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.alertHeadText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alertChips {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.alertList {
+  border-top: 1px solid var(--border);
+  padding: var(--space-2) var(--space-6) var(--space-4);
+}
+
+.alertRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.alertMain {
+  flex: 1 1 420px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alertMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.alertTitle {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: var(--weight-semibold);
+}
+
+.alertSummary {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.alertActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.askKepler,
+.askKepler:hover:not(:disabled) {
+  color: var(--kepler-text);
+}
+
+.footnote {
+  margin-top: var(--space-3);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+/* ---------- Projects ---------- */
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.projectHead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Category: overline style, 2px smaller (11 → 9px) and lighter (600 → 500). */
+.projectSector {
+  font-size: 9px;
+  line-height: 16px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.projectName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+/* Same colour as the project name text */
+.projectDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metricTight {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.metricValue {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: var(--weight-semibold);
+}
+
+.healthChip {
+  margin-top: 2px;
+}
+
+.milestoneBox {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-tile);
+  padding: var(--space-3);
+}
+
+.projectSummary {
+  flex: 1;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.projectFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-3);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Same size and weight as "Lead:"; only the colour sets the name apart. */
+.leadName {
+  color: var(--text-primary);
+  font-weight: var(--weight-regular);
+}
+
+/* ---------- Team workload ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.empList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Employee card: 4px inner hover outline, so nothing shifts */
+.emp {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  outline: 4px solid transparent;
+  outline-offset: -4px;
+  transition: outline-color var(--duration-hover-out) var(--ease-out), background-color var(--duration-theme) ease;
+}
+
+.emp:hover {
+  outline-color: var(--border-strong);
+}
+
+.empRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 14px var(--space-4) 14px var(--space-5);
+}
+
+.empBtn {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 0;
+}
+
+.empGroups {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.gName {
+  flex: 0 0 220px;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nameText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-muted);
+}
+
+.gUtil {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.utilTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.utilPct {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: var(--weight-semibold);
+}
+
+.gCount {
+  flex: 0 0 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gStatus {
+  flex: 0 0 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+}
+
+/* Expanded task list */
+.taskPanel {
+  border-top: 1px solid var(--border);
+  background: var(--bg-canvas);
+  padding: var(--space-3) var(--space-3) var(--space-4);
+}
+
+.tableScroll {
+  overflow-x: auto;
+}
+
+/* Each column is as wide as its widest content in this table; the leftover space is
+   shared equally between columns, so the visible gaps are even. Rows use subgrid so
+   every row shares the same column positions. Everything is left-aligned. */
+.taskTable {
+  min-width: 640px;
+  display: grid;
+  grid-template-columns: fit-content(280px) repeat(4, max-content);
+  justify-content: space-between;
+  column-gap: var(--space-6);
+}
+
+.taskTable > * {
+  grid-column: 1 / -1;
+}
+
+.taskGrid {
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: center;
+}
+
+.taskHead {
+  padding: var(--space-1) var(--space-3) var(--space-2);
+}
+
+.actionsCol {
+  text-align: left;
+}
+
+.taskRow {
+  padding: var(--space-3);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--duration-hover-out) var(--ease-out);
+}
+
+.taskRow:hover {
+  background: var(--row-hover);
+  transition-duration: var(--duration-hover);
+}
+
+.taskName {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.taskTitle {
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.due {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.due[data-overdue] {
+  color: var(--danger-text);
+  font-weight: var(--weight-semibold);
+}
+
+.left {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.taskActions {
+  display: flex;
+  gap: var(--space-1);
+  justify-content: flex-start;
+  /* Pull the ghost buttons left by their padding so the first icon lines up with the "Actions" header. */
+  margin-left: calc(-1 * var(--space-2));
+}
+
+.empty {
+  padding: var(--space-3);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .empGroups {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: var(--space-3);
+  }
+}
+
+@media (max-width: 760px) {
+  .alertHead {
+    flex-wrap: wrap;
+    padding: var(--space-4);
+  }
+  .alertChips {
+    justify-content: flex-start;
+  }
+  .alertList {
+    padding: var(--space-2) var(--space-4) var(--space-4);
+  }
+  .empRow {
+    align-items: flex-start;
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+  }
+  .gName,
+  .gUtil {
+    flex-basis: 100%;
+  }
+  .empBtn {
+    align-items: flex-start;
+  }
+  .empGroups {
+    column-gap: var(--space-4);
+  }
+  /* Task count and status share one row on phones */
+  .gCount {
+    flex: 0 0 auto;
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-1);
+  }
+  .gStatus {
+    flex: 1 1 140px;
+  }
+}

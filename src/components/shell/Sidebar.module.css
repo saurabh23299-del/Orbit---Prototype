@@ -1,0 +1,320 @@
+.aside {
+  position: relative;
+  width: var(--sidebar-width);
+  flex: none;
+  height: 100%;
+  overflow-y: auto;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  padding: var(--space-5) 10px;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--duration-theme) ease;
+}
+
+/* Focus ring gap matches the sidebar background */
+.aside :focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-sidebar), 0 0 0 4px var(--focus-ring);
+}
+
+/* Organisation switcher */
+.org {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: var(--control-sm);
+  margin-top: var(--space-3);
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--primary-tint);
+  color: var(--primary-text);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+  transition: background-color var(--duration-hover-out) var(--ease-out), transform var(--duration-press) var(--ease-out);
+}
+
+.org:hover { background: var(--primary-tint-hover); transition-duration: var(--duration-hover); }
+.org:active { transform: scale(0.99); }
+
+.orgDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success-text);
+  flex: none;
+}
+
+.orgName {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Navigation */
+.navList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-left: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.navLabel {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--text-primary);
+  padding-bottom: var(--space-2);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: var(--control-sm);
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: var(--weight-regular);
+  text-align: left;
+  text-decoration: none;
+  transition:
+    background-color var(--duration-select) var(--ease-in-out),
+    color var(--duration-select) var(--ease-in-out),
+    transform var(--duration-press) var(--ease-out);
+}
+
+.nav:hover {
+  background: var(--sidebar-hover);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.nav:active { transform: scale(0.99); }
+
+/* The selected item has no hover or pressed state: it's the current page. */
+.sel,
+.sel:hover,
+.sel:active {
+  background: var(--primary-tint);
+  color: var(--primary-text);
+  transform: none;
+  cursor: default;
+}
+
+.navIcon {
+  display: inline-flex;
+  width: 16px;
+  justify-content: center;
+  flex: none;
+}
+
+/* Reminders + profile */
+.bottom {
+  flex: 1;
+  min-height: 0;
+  padding-top: var(--space-10);
+  display: flex;
+  flex-direction: column;
+}
+
+.remcard {
+  position: relative;
+  margin: auto 0;
+  border-radius: var(--radius-glass);
+  padding: var(--space-3) var(--space-2) var(--space-2);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+  backdrop-filter: blur(14px) saturate(1.15);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+}
+
+.remHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px 6px;
+}
+
+.remTitle {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: var(--weight-semibold);
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--primary-tint);
+  color: var(--primary-text);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+}
+
+.rem {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--duration-hover-out) var(--ease-out);
+}
+
+.rem:hover {
+  background: color-mix(in srgb, var(--bg-surface) 70%, transparent);
+  transition-duration: var(--duration-hover);
+}
+
+.rem:active {
+  background: var(--bg-surface);
+}
+
+.rem + .rem {
+  margin-top: 5px;
+}
+
+.rem + .rem::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: -3px;
+  height: 1px;
+  background: var(--border);
+  pointer-events: none;
+}
+
+.remTile {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.info { background: var(--primary-tint); color: var(--primary-text); }
+.neutral { background: var(--bg-subtle); color: var(--text-secondary); }
+.warning { background: var(--warning-bg); color: var(--warning-text); }
+
+.remText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.remName {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --text-muted fails contrast on the sidebar; the glass card sits over it, so use secondary. */
+.remWhen {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ptab {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: var(--space-10);
+  padding: var(--space-2);
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+  background: var(--primary-tint);
+  transition: background-color var(--duration-hover-out) var(--ease-out), transform var(--duration-press) var(--ease-out);
+}
+
+.ptab:hover { background: var(--primary-tint-hover); transition-duration: var(--duration-hover); }
+.ptab:active { transform: scale(0.99); }
+
+.pAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-solid);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: var(--weight-semibold);
+  flex: none;
+}
+
+.pText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.pName {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.pRole {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--primary-text);
+}
+
+.pChev {
+  color: var(--primary-text);
+  display: inline-flex;
+}
+
+@media (max-width: 760px) {
+  .aside {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .bottom {
+    padding-top: var(--space-6);
+  }
+  .ptab {
+    margin-top: var(--space-4);
+  }
+  .nav,
+  .org {
+    min-height: 44px;
+  }
+}

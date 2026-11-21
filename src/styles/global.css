@@ -1,0 +1,147 @@
+/* App-level base styles. All colors and spacing come from design/tokens.css. */
+
+/* Extra tokens the app needs that tokens.css doesn't define. */
+:root {
+  /* White label on solid indigo, violet and danger fills (DESIGN.md §2.2 exception). */
+  --on-solid: #FFFFFF;
+  --radius-glass: 14px;
+  --radius-tile: 10px;
+  --drawer-width: 440px;
+  --modal-width: 560px;
+  --shadow-drawer: -12px 0 32px rgba(31, 28, 24, 0.08);
+  --shadow-modal: 0 24px 64px rgba(31, 28, 24, 0.18);
+  --shadow-toast: 0 12px 32px rgba(31, 28, 24, 0.2);
+  --shadow-glass: 0 8px 24px rgba(31, 28, 24, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  --glass-bg: color-mix(in srgb, var(--bg-surface) 42%, transparent);
+  --glass-border: color-mix(in srgb, var(--bg-surface) 75%, transparent);
+}
+
+[data-theme="dark"] {
+  --shadow-drawer: -12px 0 32px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --shadow-toast: 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glass: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-bg: color-mix(in srgb, var(--bg-surface) 45%, transparent);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-out);
+}
+
+a:hover {
+  color: var(--primary-text-hover);
+  text-decoration: underline;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Thin, quiet scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* ---------- Theme switch: 800ms ease-out ---------- */
+/* View Transitions: the old and new page crossfade as one layer. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 800ms;
+  animation-timing-function: var(--ease-out);
+}
+
+html.theme-crossfade,
+html.theme-crossfade *,
+html.theme-crossfade *::before,
+html.theme-crossfade *::after {
+  transition: none !important;
+}
+
+/* Fallback (no View Transitions): every element transitions its colours together. */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color 800ms var(--ease-out),
+    background 800ms var(--ease-out),
+    color 800ms var(--ease-out),
+    border-color 800ms var(--ease-out),
+    outline-color 800ms var(--ease-out),
+    box-shadow 800ms var(--ease-out),
+    fill 800ms var(--ease-out),
+    stroke 800ms var(--ease-out) !important;
+}
+
+/* tokens.css shortens every animation for reduced motion; also stop infinite loops
+   (spinners, thinking dots, shimmer) so they don't flicker. Status text still explains the state. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes orbit-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes orbit-rotate {
+  to { transform: rotate(360deg); }
+}

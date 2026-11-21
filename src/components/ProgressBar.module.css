@@ -1,0 +1,13 @@
+.track {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  /* Rebalance: bars animate to new values over 500ms. */
+  transition: width 500ms var(--ease-out), background-color 500ms var(--ease-out);
+}

@@ -1,0 +1,57 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: var(--chip-height);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.sm {
+  height: 20px;
+  padding: 0 var(--space-2);
+  font-size: 11px;
+  gap: var(--space-1);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.success { background: var(--success-bg); color: var(--success-text); }
+.warning { background: var(--warning-bg); color: var(--warning-text); }
+.danger  { background: var(--danger-bg);  color: var(--danger-text); }
+.info    { background: var(--primary-tint); color: var(--primary-text); }
+.neutral { background: var(--bg-subtle); color: var(--text-secondary); }
+.kepler  { background: var(--kepler-tint); color: var(--kepler-text); }
+
+/* Observed / Predicted tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: 20px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  flex: none;
+}
+
+.observed { background: var(--bg-subtle); color: var(--text-secondary); }
+.predicted { background: var(--kepler-tint); color: var(--kepler-text); }
+
+.conf {
+  font-weight: var(--weight-medium);
+}

@@ -1,0 +1,239 @@
+/* Evidence */
+.evidence {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.evLine {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.evTag {
+  margin-top: 0;
+}
+
+.dsection {
+  display: flex;
+  flex-direction: column;
+}
+
+.overline {
+  margin: 0;
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tile {
+  border-radius: var(--radius-sm);
+  background: var(--kepler-tint);
+  color: var(--kepler-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+/* Context card */
+.contextWrap {
+  padding: var(--space-4) var(--space-6) 0;
+}
+
+.context {
+  border: 1px solid var(--kepler-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contextLabel {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--kepler-text);
+}
+
+.contextTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: var(--weight-semibold);
+}
+
+.back {
+  align-self: flex-start;
+  margin-left: calc(-1 * var(--space-2));
+}
+
+/* Messages */
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.user,
+.kep,
+.thinking {
+  animation: orbit-fade-in var(--duration-enter) var(--ease-out);
+}
+
+.user {
+  align-self: flex-end;
+  max-width: 85%;
+  background: var(--primary-tint);
+  color: var(--text-primary);
+  border-radius: 12px 12px 4px 12px;
+  padding: var(--space-2) var(--space-3);
+}
+
+.kep {
+  align-self: flex-start;
+  max-width: 92%;
+  background: var(--bg-subtle);
+  border-radius: 12px 12px 12px 4px;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.kepName {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--weight-semibold);
+  color: var(--kepler-text);
+}
+
+.kepLine {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.thinking {
+  align-self: flex-start;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Composer */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.qchip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--kepler-subtle);
+  background: var(--bg-surface);
+  color: var(--kepler-text);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: var(--weight-medium);
+  text-align: left;
+  transition: background-color var(--duration-hover-out) var(--ease-out), transform var(--duration-press) var(--ease-out);
+}
+
+.qchip:hover:not(:disabled) {
+  background: var(--kepler-tint);
+  transition-duration: var(--duration-hover);
+}
+
+.qchip:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.qchip:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--kepler);
+}
+
+.qchip:disabled {
+  color: var(--text-disabled);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
+
+.composer {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.field {
+  flex: 1;
+  min-width: 0;
+  height: var(--control-md);
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color var(--duration-hover-out) var(--ease-out), box-shadow 100ms var(--ease-out);
+}
+
+.field::placeholder {
+  color: var(--text-muted);
+}
+
+.field:hover {
+  border-color: var(--input-border-hover);
+}
+
+.field:focus,
+.field:focus-visible {
+  outline: none;
+  border-color: var(--kepler);
+  box-shadow: 0 0 0 3px var(--kepler-subtle);
+}
+
+.send {
+  width: var(--control-md);
+  padding: 0;
+  flex: none;
+}
+
+.disclaimer {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+/* Local copy: CSS modules scope keyframe names, so the global one isn't visible here. */
+@keyframes orbit-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}

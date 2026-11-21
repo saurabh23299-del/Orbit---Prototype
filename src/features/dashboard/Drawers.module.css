@@ -1,0 +1,271 @@
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+.label {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: var(--weight-medium);
+  color: var(--text-muted);
+}
+
+.secondary {
+  color: var(--text-secondary);
+}
+
+.strong {
+  font-weight: var(--weight-medium);
+}
+
+.selfStart {
+  align-self: flex-start;
+}
+
+.kepText,
+.kepText:hover:not(:disabled) {
+  color: var(--kepler-text);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Kepler recommends box */
+.recommend {
+  background: var(--kepler-tint);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.recLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--kepler-text);
+  font-weight: var(--weight-semibold);
+  font-size: 13px;
+  line-height: 20px;
+}
+
+/* Chat */
+.chatBody {
+  gap: var(--space-3);
+}
+
+/* Employee */
+.bigRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.big {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: -0.015em;
+}
+
+.thickBar {
+  height: 8px;
+}
+
+.breakdown {
+  margin: 0;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-tile);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.breakdown > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.breakdown dt {
+  color: var(--text-secondary);
+}
+
+.breakdown dd {
+  margin: 0;
+}
+
+.breakdown .total {
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+  font-weight: var(--weight-semibold);
+}
+
+.breakdown .total dt {
+  color: var(--text-primary);
+}
+
+.spark {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+  height: 64px;
+}
+
+.sparkBar {
+  flex: 1;
+  border-radius: 4px 4px 2px 2px;
+  transition: opacity var(--duration-hover) var(--ease-out);
+}
+
+.spark:hover .sparkBar {
+  opacity: 0.4;
+}
+
+.spark .sparkBar:hover {
+  opacity: 1;
+}
+
+.sparkAxis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--text-muted);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.taskItemTight {
+  padding: var(--space-2) 0;
+}
+
+.taskText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.taskTitle {
+  font-weight: var(--weight-medium);
+}
+
+.overdue {
+  color: var(--danger-text);
+  font-weight: var(--weight-semibold);
+}
+
+.smallIcb {
+  width: 28px;
+  height: 28px;
+}
+
+.inlineLink {
+  all: unset;
+  cursor: pointer;
+  color: var(--primary-text);
+  border-radius: 4px;
+}
+
+.inlineLink:hover {
+  color: var(--primary-text-hover);
+  text-decoration: underline;
+}
+
+.inlineLink:focus-visible {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+/* Project */
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.measure {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.measureValue {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: var(--weight-semibold);
+}
+
+.milestone {
+  background: var(--bg-subtle);
+  border-radius: var(--radius-tile);
+  padding: var(--space-3) var(--space-4);
+}
+
+.tight {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.blocker {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.blockerIcon {
+  color: var(--danger-text);
+  margin-top: 2px;
+}
+
+.dep {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-tile);
+  padding: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.depTitle {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: var(--weight-medium);
+}
