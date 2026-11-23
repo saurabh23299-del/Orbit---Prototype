@@ -94,13 +94,9 @@
   gap: var(--space-4);
 }
 
-/* Team size footer: one designation per line */
-.roleList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
+/* "13 in progress" segments wrap as whole units */
+.nowrap {
+  white-space: nowrap;
 }
 
 .kpiLine {
@@ -115,22 +111,42 @@
   border-radius: var(--radius-lg);
   background:
     linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box,
-    linear-gradient(100deg, var(--kepler), var(--primary)) border-box;
+    linear-gradient(
+      100deg,
+      color-mix(in srgb, var(--kepler) 55%, var(--bg-surface)),
+      color-mix(in srgb, var(--primary) 55%, var(--bg-surface))
+    ) border-box;
   box-shadow: var(--shadow-card);
 }
 
+/* Kepler's header is a soft violet band: the one place on the Dashboard where
+   Kepler speaks gets Kepler's own surface. Band and divider are the Kepler tokens
+   mixed halfway into the card colour, so they stay quiet next to the content. */
 .alertHead {
   width: 100%;
   padding: var(--space-5) var(--space-6);
   gap: var(--space-4);
-  border-radius: var(--radius-lg);
+  border-radius: calc(var(--radius-lg) - 1px);
+  background: color-mix(in srgb, var(--kepler-tint) 50%, var(--bg-surface));
 }
 
+.alertHead[data-attached] {
+  border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--kepler-subtle) 45%, var(--bg-surface));
+}
+
+/* The header fills the card edge to edge, so its focus ring is drawn inside the
+   band; an outside ring would spill past the card border. */
+.alertHead:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--focus-ring);
+}
+
+/* On the tint band the tile flips to the card surface, so it still reads as a tile. */
 .keplerTile {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-tile);
-  background: var(--kepler-tint);
+  background: var(--bg-surface);
   color: var(--kepler-text);
   display: inline-flex;
   align-items: center;
@@ -153,8 +169,36 @@
   gap: var(--space-2);
 }
 
+/* Collapsed card: the most severe open alert, one line, with its next step.
+   Left edge lines up with the heading text (40px Kepler tile + 16px gap). */
+.alertLead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6) var(--space-5) calc(var(--space-6) + 40px + var(--space-4));
+}
+
+.alertLeadText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.alertLeadTitle {
+  color: var(--text-primary);
+}
+
+.alertLeadSummary {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .alertList {
-  border-top: 1px solid var(--border);
   padding: var(--space-2) var(--space-6) var(--space-4);
 }
 
@@ -182,11 +226,6 @@
   gap: var(--space-2);
 }
 
-.alertTitle {
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: var(--weight-semibold);
-}
 
 .alertSummary {
   font-size: 13px;
@@ -298,6 +337,8 @@
   font-size: 13px;
   line-height: 20px;
   color: var(--text-secondary);
+  /* Keeps the original line breaks; opts out of the global text-wrap: pretty. */
+  text-wrap: wrap;
 }
 
 .projectFoot {
@@ -345,8 +386,20 @@
   gap: var(--space-2);
 }
 
-/* Employee card: 4px inner hover outline, so nothing shifts */
+/* Employee card: 4px inner hover outline, so nothing shifts.
+   The row and its expanded task table share one set of column tracks, so tasks sit
+   under names, status under utilisation, deadlines under counts and actions under status.
+   --emp-trail is the space after the row's last column: chevron gap + chevron +
+   row gap + Kepler slot + row gap + Details + row padding. The task table spans
+   that space in its last track. */
 .emp {
+  --emp-cols: minmax(0, 220px) 200px 120px 180px;
+  --emp-details: 72px;
+  --emp-kepler: 28px;
+  --emp-trail: calc(
+    var(--space-3) + 28px + var(--space-4) + var(--emp-kepler) + var(--space-4) +
+    var(--emp-details) + var(--space-4)
+  );
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -377,10 +430,55 @@
 .empGroups {
   flex: 1;
   min-width: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: var(--emp-cols);
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-6);
+  column-gap: var(--space-6);
+}
+
+.detailsBtn {
+  width: var(--emp-details);
+  justify-content: center;
+  flex: none;
+}
+
+/* Kepler marker: the static moon on a violet-tint disc, shown while Kepler has an
+   open alert about this person. Opens that alert's drawer. */
+.keplerSlot {
+  width: var(--emp-kepler);
+  height: var(--emp-kepler);
+  flex: none;
+  display: inline-flex;
+}
+
+.keplerMark {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  background: var(--kepler-tint);
+  color: var(--kepler-text);
+  cursor: pointer;
+  transition: background-color var(--duration-hover-out) var(--ease-out);
+}
+
+.keplerMark:hover {
+  background: var(--kepler-subtle);
+  transition-duration: var(--duration-hover);
+}
+
+.keplerMark:active {
+  background: var(--kepler-subtle);
+  scale: 0.94;
+}
+
+.keplerMark:focus-visible {
+  box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--focus-ring);
 }
 
 .gName {
@@ -399,7 +497,7 @@
 }
 
 .name {
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-medium);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -446,35 +544,34 @@
   gap: var(--space-1);
 }
 
-/* Expanded task list */
+/* Expanded task list. Panel padding + row padding = the row's 20px left inset. */
 .taskPanel {
   border-top: 1px solid var(--border);
   background: var(--bg-canvas);
-  padding: var(--space-3) var(--space-3) var(--space-4);
+  padding: var(--space-3) var(--space-2) var(--space-4);
 }
 
 .tableScroll {
   overflow-x: auto;
 }
 
-/* Each column is as wide as its widest content in this table; the leftover space is
-   shared equally between columns, so the visible gaps are even. Rows use subgrid so
-   every row shares the same column positions. Everything is left-aligned. */
+/* Same tracks as the row above; the last track also covers the row's trailing
+   controls, so the leftover space (and therefore every column start) matches. */
 .taskTable {
-  min-width: 640px;
-  display: grid;
-  grid-template-columns: fit-content(280px) repeat(4, max-content);
-  justify-content: space-between;
-  column-gap: var(--space-6);
+  --task-cols:
+    minmax(0, 220px) 200px 120px
+    calc(180px + var(--emp-trail) - var(--space-5));
+  display: flex;
+  flex-direction: column;
 }
 
-.taskTable > * {
-  grid-column: 1 / -1;
-}
-
+/* Each row is its own grid on the shared tracks (not subgrid: subgrid row padding
+   would eat into the outer tracks and shift every column). */
 .taskGrid {
   display: grid;
-  grid-template-columns: subgrid;
+  grid-template-columns: var(--task-cols);
+  justify-content: space-between;
+  column-gap: var(--space-6);
   align-items: center;
 }
 
@@ -521,10 +618,9 @@
   font-weight: var(--weight-semibold);
 }
 
-.left {
-  font-size: 13px;
-  line-height: 20px;
-  color: var(--text-secondary);
+.dueCell {
+  display: flex;
+  flex-direction: column;
 }
 
 .taskActions {
@@ -543,7 +639,13 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
+  /* Row wraps, so shared column lines no longer apply: content-sized task columns. */
+  .taskTable {
+    min-width: 600px;
+    --task-cols: minmax(160px, 1fr) 120px 120px 180px;
+  }
   .empGroups {
+    display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     row-gap: var(--space-3);
@@ -560,6 +662,18 @@
   }
   .alertList {
     padding: var(--space-2) var(--space-4) var(--space-4);
+  }
+  /* Phones: chip, then the alert text at full width, then the action. */
+  .alertLead {
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-4);
+  }
+  .alertLeadText {
+    flex-basis: 100%;
+  }
+  .alertLeadSummary {
+    white-space: normal;
   }
   .empRow {
     align-items: flex-start;

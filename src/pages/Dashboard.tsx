@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { PageHeader } from '../components/shell/AppShell';
 import { EMPLOYEES, PROJECTS } from '../data/mockData';
-import { BAND_FILL, BAND_LABEL, employeeStats, type Band } from '../data/selectors';
+import { BAND_LABEL, BAND_MARK, alertByPerson, employeeStats, type Band } from '../data/selectors';
 import type { EmployeeId, Task } from '../data/types';
 import { ActionModal, type ModalRequest } from '../features/dashboard/ActionModal';
 import { AlertCard } from '../features/dashboard/AlertCard';
@@ -24,6 +24,7 @@ export default function Dashboard() {
   // Re-keys the modal for each new request so its steps start fresh.
   const [modalKey, setModalKey] = useState(0);
   const stats = employeeStats(tasks);
+  const keplerFlags = alertByPerson(handled);
 
   /** Opens the manager's confirmation flow. Drawers close first, as in the reference. */
   const openModal = (req: ModalRequest) => {
@@ -64,7 +65,7 @@ export default function Dashboard() {
             <div className={styles.legend} aria-label="Utilisation bands">
               {BANDS.map((b) => (
                 <span key={b} className={styles.legendItem}>
-                  <span className={styles.swatch} style={{ background: BAND_FILL[b] }} aria-hidden="true" />
+                  <span className={styles.swatch} style={{ background: BAND_MARK[b] }} aria-hidden="true" />
                   {BAND_LABEL[b]}
                 </span>
               ))}
@@ -81,6 +82,8 @@ export default function Dashboard() {
               onDetails={() => setDrawer({ type: 'emp', id: e.id })}
               onReassign={(t) => reassign(t)}
               onDeadline={deadline}
+              alert={keplerFlags[e.id]}
+              onAlert={(a) => setDrawer({ type: 'alert', id: a.id })}
             />
           ))}
         </div>

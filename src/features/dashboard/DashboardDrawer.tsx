@@ -14,7 +14,7 @@ import {
   ALERTS, CHAT, LOADS, LOAD_ORDER, PROJECTS, TEAM_NAME, WEEK_LABELS, employeeById, projectById,
 } from '../../data/mockData';
 import {
-  BAND_FILL, SEVERITY_TONE, TASK_STATUS_TONE, bandOf, employeeStats, employeeStatus, isOverdue,
+  BAND_MARK, SEVERITY_TONE, TASK_STATUS_TONE, bandOf, employeeStats, employeeStatus, isOverdue,
 } from '../../data/selectors';
 import type { Alert, AlertId, EmployeeId, ProjectId, Task } from '../../data/types';
 import { useAppStore } from '../../store/appStore';
@@ -208,7 +208,7 @@ export function DashboardDrawer({ view, onClose, onNavigate, onReassign, onDeadl
                 key={p.label}
                 className={styles.sparkBar}
                 title={`Week of ${p.label}: ${p.v}%`}
-                style={{ height: `${Math.max(8, Math.min(100, p.v))}%`, background: BAND_FILL[bandOf(p.v)] }}
+                style={{ height: `${Math.max(8, Math.min(100, p.v))}%`, background: BAND_MARK[bandOf(p.v)] }}
               />
             ))}
           </div>

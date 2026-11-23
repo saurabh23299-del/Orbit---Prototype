@@ -1,26 +1,46 @@
+import { Fragment } from 'react';
 import { KpiCard } from '../../components/Card';
 import { Chip } from '../../components/Chip';
 import { ProgressBar } from '../../components/ProgressBar';
 import { SectionHeader } from './parts';
 import { IconAlert, IconCheckCircle, IconGauge, IconTeam } from '../../components/icons';
 import { useCountUp } from '../../components/useCountUp';
-import { EMPLOYEES } from '../../data/mockData';
+import { EMPLOYEES, TEAM_NAME, WINDOW } from '../../data/mockData';
 import { teamKpis } from '../../data/selectors';
 import type { Task } from '../../data/types';
 import styles from './Dashboard.module.css';
 
 /**
- * Counts per designation, using the full role titles shown in Team workload:
- * "2 Senior developers · 2 Backend developers · 1 Full-stack developer · …".
+ * Counts per designation on one line, as in the reference:
+ * "2 senior · 2 backend · 1 full-stack · 2 frontend · 1 DevOps".
  */
 const ROLE_ORDER = ['Senior developer', 'Backend developer', 'Full-stack developer', 'Frontend developer', 'DevOps engineer'];
+const ROLE_SHORT: Record<string, string> = {
+  'Senior developer': 'senior',
+  'Backend developer': 'backend',
+  'Full-stack developer': 'full-stack',
+  'Frontend developer': 'frontend',
+  'DevOps engineer': 'DevOps',
+};
 const roleMix = () => {
   const roles = [...ROLE_ORDER, ...EMPLOYEES.map((e) => e.role).filter((r) => !ROLE_ORDER.includes(r))];
   return [...new Set(roles)]
     .map((role) => ({ role, n: EMPLOYEES.filter((e) => e.role === role).length }))
     .filter((x) => x.n > 0)
-    .map(({ role, n }) => `${n} ${role.charAt(0).toUpperCase()}${role.slice(1)}${n > 1 ? 's' : ''}`);
+    .map(({ role, n }) => `${n} ${ROLE_SHORT[role] ?? role.toLowerCase()}`);
 };
+
+/** Keeps each "13 in progress" segment whole, so a line never ends on a bare number. */
+const Segments = ({ parts }: { parts: string[] }) => (
+  <>
+    {parts.map((p, i) => (
+      <Fragment key={p}>
+        {i > 0 && ' · '}
+        <span className={styles.nowrap}>{p}</span>
+      </Fragment>
+    ))}
+  </>
+);
 
 export function KpiRow({ tasks }: { tasks: Task[] }) {
   const k = teamKpis(tasks);
@@ -31,7 +51,7 @@ export function KpiRow({ tasks }: { tasks: Task[] }) {
 
   return (
     <section aria-labelledby="ov" className={styles.section}>
-      <SectionHeader id="ov" title="Team overview" />
+      <SectionHeader id="ov" title="Team overview" description={`${TEAM_NAME} · next 2 weeks (${WINDOW.label})`} />
       <div className={styles.kpiGrid}>
         <KpiCard
           label="Team size"
@@ -39,11 +59,7 @@ export function KpiRow({ tasks }: { tasks: Task[] }) {
           value={size}
           unit="members"
           supporting={<div><Chip tone="neutral">Across {k.activeProjects} active projects</Chip></div>}
-          footer={
-            <ul className={styles.roleList} aria-label="Team by designation">
-              {roleMix().map((line) => <li key={line}>{line}</li>)}
-            </ul>
-          }
+          footer={<Segments parts={roleMix()} />}
         />
         <KpiCard
           label="Capacity utilisation"
@@ -58,7 +74,7 @@ export function KpiRow({ tasks }: { tasks: Task[] }) {
           icon={<IconCheckCircle size={16} />}
           value={active}
           unit="tasks"
-          supporting={<span className={`${styles.kpiLine} num`}>{k.inProgress} in progress · {k.inReview} in review · {k.todo} to do</span>}
+          supporting={<span className={`${styles.kpiLine} num`}><Segments parts={[`${k.inProgress} in progress`, `${k.inReview} in review`, `${k.todo} to do`]} /></span>}
           footer="Synced from Jira and Linear (simulated)"
         />
         <KpiCard
@@ -67,7 +83,7 @@ export function KpiRow({ tasks }: { tasks: Task[] }) {
           value={ob}
           unit="tasks"
           valueTone={k.overdueOrBlocked > 0 ? 'danger' : 'default'}
-          supporting={<span className={`${styles.kpiLine} num`}>{k.blocked} blocked · {k.overdue} overdue</span>}
+          supporting={<span className={`${styles.kpiLine} num`}><Segments parts={[`${k.blocked} blocked`, `${k.overdue} overdue`]} /></span>}
           footer="Check the alerts in Kepler insights below"
         />
       </div>

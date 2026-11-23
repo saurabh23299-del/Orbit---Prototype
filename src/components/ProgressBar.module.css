@@ -1,8 +1,8 @@
 .track {
+  position: relative;
   height: 6px;
   border-radius: var(--radius-full);
   background: var(--bg-subtle);
-  overflow: hidden;
 }
 
 .fill {
@@ -10,4 +10,18 @@
   border-radius: var(--radius-full);
   /* Rebalance: bars animate to new values over 500ms. */
   transition: width 500ms var(--ease-out), background-color 500ms var(--ease-out);
+}
+
+/* 85% line: a 2px muted tick, 2px taller than the track on each side so it reads
+   where the bar is empty, with a 1px card-coloured halo to separate it from the fill. */
+.threshold {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--text-muted);
+  box-shadow: 0 0 0 1px var(--bg-surface);
+  pointer-events: none;
 }

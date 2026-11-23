@@ -19,20 +19,22 @@
   box-shadow: 0 0 0 2px var(--bg-sidebar), 0 0 0 4px var(--focus-ring);
 }
 
-/* Organisation switcher */
+/* Organisation switcher: equal padding on all four sides (vertical matches the
+   8px horizontal), and the same 20px gap above (to the logo) and below (to the
+   nav), so it sits centred between them. */
 .org {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   width: 100%;
-  height: var(--control-sm);
-  margin-top: var(--space-3);
-  padding: 0 var(--space-2);
+  margin-top: var(--space-5);
+  padding: var(--space-2);
   border: 0;
   border-radius: var(--radius-sm);
   background: var(--primary-tint);
   color: var(--primary-text);
   font-size: 13px;
+  line-height: 20px;
   font-weight: var(--weight-medium);
   transition: background-color var(--duration-hover-out) var(--ease-out), transform var(--duration-press) var(--ease-out);
 }
@@ -62,7 +64,7 @@
   flex-direction: column;
   gap: var(--space-1);
   padding-left: var(--space-4);
-  margin-top: var(--space-6);
+  margin-top: var(--space-5);
 }
 
 .navLabel {

@@ -21,6 +21,13 @@ export const BAND_FILL: Record<Band, string> = {
   High: 'var(--load-overloaded)',
 };
 
+/** Deeper band colours for thin marks (bars, legend swatches) that must read at 3:1. */
+export const BAND_MARK: Record<Band, string> = {
+  Low: 'var(--load-under-mark)',
+  Moderate: 'var(--load-healthy-mark)',
+  High: 'var(--load-overloaded-mark)',
+};
+
 export const BAND_LABEL: Record<Band, string> = {
   Low: 'Low, under 60%',
   Moderate: 'Moderate, 60–85%',
@@ -171,6 +178,17 @@ export const matchesCandidateQuery = (c: Candidate, q: string): boolean => {
 // ---------- Alerts ----------
 
 export const liveAlerts = (handled: Partial<Record<AlertId, boolean>>): Alert[] => ALERTS.filter((a) => !handled[a.id]);
+
+export const SEVERITY_RANK: Record<Severity, number> = { Critical: 0, High: 1, Medium: 2 };
+
+/** Each person's most severe open alert (the alert lists who it covers). */
+export const alertByPerson = (handled: Partial<Record<AlertId, boolean>>): Partial<Record<EmployeeId, Alert>> => {
+  const out: Partial<Record<EmployeeId, Alert>> = {};
+  for (const a of [...liveAlerts(handled)].sort((x, y) => SEVERITY_RANK[x.severity] - SEVERITY_RANK[y.severity])) {
+    for (const id of a.people) out[id] ??= a;
+  }
+  return out;
+};
 
 export const alertCountChips = (handled: Partial<Record<AlertId, boolean>>): { text: string; tone: Tone }[] => {
   const live = liveAlerts(handled);

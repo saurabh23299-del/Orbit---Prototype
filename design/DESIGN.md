@@ -104,7 +104,17 @@ The agreed utilisation bands (from the product spec) are **Low under 60%, Modera
 | Moderate, 60–85% | `--load-healthy` | `#9CC5A1` | `#6E9C76` | `#1F1C18` / `#171512` |
 | High, above 85% | `--load-overloaded` | `#E19A8A` | `#B9705F` | `#1F1C18` / `#171512` |
 
-Used for capacity bars on employee cards, the workload distribution chart and utilisation sparklines.
+The fills above are for large areas that carry text, such as the workload distribution chart.
+
+**Band marks.** Thin indicators (utilisation bars, sparkline bars, legend swatches) use a deeper shade of each band so the mark reads at 3:1 or more against the `--bg-subtle` track and the canvas (WCAG 1.4.11). Defined in `src/styles/global.css`:
+
+| Band | Token | Light | Dark |
+|---|---|---|---|
+| Low | `--load-under-mark` | `#767EAE` | `#6E75A3` |
+| Moderate | `--load-healthy-mark` | `#568E60` | = `--load-healthy` |
+| High | `--load-overloaded-mark` | `#C2695A` | = `--load-overloaded` |
+
+Utilisation bars also carry a 2px `--text-muted` tick at 85%, the start of the High band, so "close to High" reads without colour.
 
 **Capacity utilisation** = assigned remaining effort ÷ available capacity × 100, over the next 2 weeks. Available capacity = working hours − meetings − leave − other responsibilities. It's a workload-planning measure, never a productivity score. Say so wherever it's first shown.
 
